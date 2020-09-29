@@ -1,0 +1,18 @@
+.fa {
+  margin-right: 10px;
+}
+
+@media only screen and (min-width: 768px) {
+  .filter {
+    max-width: 150px;
+    float: right;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .btn-group.master {
+    position: relative;
+    bottom: 16px;
+    left: 16px;
+  }
+}

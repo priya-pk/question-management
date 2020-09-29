@@ -1,0 +1,121 @@
+<!--
+* Copyright (c) 2020 Vyasaka Technologies. All Rights Reserved.
+-->
+
+<!-- form ::start -->
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-12 col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i><strong>Question Management View</strong>
+          <i class="fa fa-arrow-circle-left pull-right" [routerLink]="['/question-management']"></i>
+        </div>
+        <form [formGroup]="questionManagementForm">
+          <div class="card-body">
+            <div class="form-row">
+               <!-- Id  :: start -->
+              <div class="form-group col-sm-12 col-md-4">
+                <label for="id">Id :</label>
+                <input class="form-control"  formControlName="id" readonly/>        
+              </div>
+               <!-- Id  :: End -->
+               <!-- Short Name  :: start -->
+              <div class="form-group col-sm-12 col-md-8">
+                <label>Short Name :</label>
+                <textarea
+                  placeholder="Short Name"
+                  class="form-control"
+                  formControlName="shortName"
+                readonly>
+                </textarea>                                
+              </div>
+            </div>
+            <!-- Short Name  :: End -->
+            <!-- Group Name  :: start -->
+            <div class="form-row">
+              <div class="form-group col-sm-12 col-md-4">
+                <label>Group Name :</label>
+                <input
+                  placeholder="Group"
+                  class="form-control"
+                  formControlName="groupName"
+                 readonly  />
+              </div>
+              <!-- Group Name  :: End -->
+              <!-- Group Id  :: start -->
+              <div class="form-group col-sm-12 col-md-4">
+                <label>Group Id :</label>
+                <input  class="form-control" formControlName="groupId" placeholder="Group Id" readonly/>               
+              </div>
+              <!-- Group Id  :: End -->
+              <!-- Suggestion Mark  :: start -->
+              <div class="form-group col-sm-12 col-md-4">
+                <label>Suggestion Mark :</label>
+                <input  class="form-control"  placeholder="Suggestion Mark" formControlName="suggestionMark" readonly/>                
+              </div>
+             </div>
+             <!-- Suggestion Mark  :: End -->
+             <!-- Time Allocated  :: start -->
+            <div class="form-row">
+              <div class="form-group col-sm-12 col-md-4">
+                <label>Time Allocated :</label>
+                <input  class="form-control" formControlName="timeAllocated" placeholder="Time Allocated(mins)" readonly>
+              </div>
+              <!-- Time Allocated  :: End -->
+              <!-- Level  :: start -->
+              <div class="form-group col-sm-12 col-md-4">
+                <label>Level :</label>
+                <input  class="form-control" formControlName="level" readonly >                                 
+              </div>
+              <!-- Level  :: End -->
+              <!-- Type  :: Start -->                            
+              <div class="form-group col-sm-12 col-md-4">
+                <label >Type :</label>
+                <input class="form-control" formControlName="type" readonly >                                      
+              </div>
+              <!-- Type  :: End -->                               
+            </div>
+             <!-- Description  :: Start -->                           
+            <div class="form-row">
+              <div class="form-group col-sm-12 col-md-4">
+                <label for="description">Description :</label>
+                <input  class="form-control" formControlName="description" placeholder="Description" readonly />                
+              </div>
+              <!-- Description  :: End -->
+              <!-- Total Options  :: Start -->
+              <div class="form-group col-sm-12 col-md-4" *ngIf="types === true">
+                <label>Total Options :</label>
+                <input  class="form-control" formControlName="totalOptions" placeholder="Total Options" readonly>
+                
+              </div>
+              <!-- Total Options  :: End --> 
+              <!-- Answer   :: Start -->  
+              <div class="form-group col-sm-12 col-md-4">
+                <label>Answer :</label>
+                <input  class="form-control" formControlName="answer" placeholder="Answer" readonly>
+              </div>
+              <!-- Answer   :: End -->  
+            </div> 
+              <!-- Options   :: Start -->  
+              <div class="form-row">
+                <div  formArrayName="options" *ngFor="let option of  getControl(); let i=index">            
+                <div class="form-group col-sm-12 col-md-12"  [formGroupName]="i">
+                  <label>Option :</label>
+                  <input  
+                  class="form-control" 
+                  formControlName='option'
+                  placeholder="option"
+                  readonly  
+                >                
+                </div>
+               </div>
+             </div>           
+             <!-- Options   :: End --> 
+          </div>         
+        </form>
+      </div>
+    </div>
+  </div>
+</div>     
+<!-- form :: end -->

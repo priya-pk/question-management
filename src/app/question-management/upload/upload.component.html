@@ -1,0 +1,163 @@
+<!--
+* Copyright 2020 Vyasaka Technologies
+-->
+
+<div>
+  <tabset #tabset>
+    <tab heading="Upload" id="tab1">
+       <i class="fa fa-arrow-circle-left pull-right" [routerLink]="['/question-management']" title="Back"></i>
+      <div align="center">
+        <button class="btn btn-sm btn-primary">
+          <a
+            class="csv-template"
+            download="question_management_template.csv"
+            target="_blank"
+            href="{{ templateURL }}"
+            style="color: white; text-decoration: none;"
+            >Download template</a>
+        </button>
+        <button class="btn btn-sm btn-primary" (change)="onFileChange($event)">
+          <input type="file" name="File upload" id="txtFileUpload" value="upload" accept=".csv" />
+        </button>
+        <button class="btn btn-sm btn-success" (click)="uploadFile(0)">Upload</button>
+      </div>
+    </tab>
+
+    <tab heading="Preview" *ngIf="dataSource !== undefined && dataSource.length > 0">
+      <div class="card">
+        <div class="card-header">
+           <i class="fa fa-align-justify"></i><strong>Preview</strong>
+          <span class="float-right">
+            <button class="btn btn-sm btn-danger" type="button" [routerLink]="['/question-management']">CANCEL</button>
+            <button class="btn btn-sm btn-primary" (click)="onSave()">SAVE</button>
+          </span>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <!-- table :: start -->
+           <div class="table-responsive">
+            <table class="table table-responsive-sm table-bordered">
+              <thead>
+                <tr>
+                  <th>Index</th>
+                  <th>Id</th>
+                  <th>Short Name</th>
+                  <th>Group Name</th>
+                  <th>Group Id</th>
+                  <th>Suggestion Mark</th>
+                  <th>Time Allocated</th>
+                  <th>Level</th>
+                  <th>Type</th>
+                  <th>Description</th>
+                  <th>Total Options</th>
+                  <th>Answer</th>
+                  <th>Option 1</th>
+                  <th>Option 2</th>
+                  <th>Option 3</th>
+                  <th>Option 4</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="
+                    let element of dataSource  | paginate: { itemsPerPage: 25, currentPage: page } let i = index; " >
+                  <td>{{ i+1 }}</td>
+                  <td>{{ element['Id'] }}</td>
+                  <td>{{ element['Short Name'] }}</td>
+                  <td>{{ element['Group Name'] }}</td>
+                  <td>{{ element['Group Id'] }}</td>
+                  <td>{{ element['Suggestion Mark'] }}</td>
+                  <td>{{ element['Time Allocated'] }}</td>
+                  <td>{{ element['Level'] }}</td>
+                  <td>{{ element['type'] }}</td>
+                  <td>{{ element['Description'] }}</td>
+                  <td>{{ element['Total Options'] }}</td>
+                  <td>{{ element['Answer'] }}</td>
+                  <td>{{ element['Option 1'] }}</td>
+                  <td>{{ element['Option 2'] }}</td>
+                  <td>{{ element['Option 3'] }}</td>
+                  <td>{{ element['Option 4'] }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+            <!-- table :: start -->
+          </div>
+        </div>
+            <!-- table :: start -->
+        <pagination-controls (pageChange)="page = $event" style="float: right;"></pagination-controls>
+      </div>
+    </tab>
+    <tab
+      heading="Invalid Data"
+      *ngIf="invalidData !== undefined && invalidData.length > 0"
+    >
+      <div class="card">
+        <div class="card-header">
+         <i class="fa fa-bars"></i><strong>Preview</strong> 
+          <span class="float-right">
+            <button class="btn btn-sm btn-primary" (click)="getExportCsv()">
+              Download
+            </button>
+          </span>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="table-responsive">
+              <!-- table :: start -->
+              <table class="table table-responsive-sm table-bordered">
+                <thead>
+                  <th>Index</th>
+                  <th>Id</th>
+                  <th>Short Name</th>
+                  <th>Group Name</th>
+                  <th>Group Id</th>
+                  <th>Mark</th>
+                  <th>Time</th>
+                  <th>Level</th>
+                  <th>Type</th>
+                  <th>Description</th>
+                  <th>Total Options</th>
+                  <th>Answer</th>
+                  <th>Option 1</th>
+                  <th>Option 2</th>
+                  <th>Option 3</th>
+                  <th>Option 4</th>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="
+                      let element of invalidData
+                        | paginate: { itemsPerPage: 25, currentPage: page };
+                      let i = index
+                    "
+                  >
+                  <td>{{ i+1 }}</td>
+                  <td>{{ element['Id'] }}</td>
+                  <td>{{ element['Short Name'] }}</td>
+                  <td>{{ element['Group Name'] }}</td>
+                  <td>{{ element['Group Id'] }}</td>
+                  <td>{{ element['Suggestion Mark'] }}</td>
+                  <td>{{ element['Time Allocated'] }}</td>
+                  <td>{{ element['Level'] }}</td>
+                  <td>{{ element['type'] }}</td>
+                  <td>{{ element['Description'] }}</td>
+                  <td>{{ element['Total Options'] }}</td>
+                  <td>{{ element['Answer'] }}</td>
+                  <td>{{ element['Option 1'] }}</td>
+                  <td>{{ element['Option 2'] }}</td>
+                  <td>{{ element['Option 3'] }}</td>
+                  <td>{{ element['Option 4'] }}</td>                
+                  </tr>
+                </tbody>
+              </table>
+              <!-- table :: start -->
+            </div>
+          </div>
+        </div>
+        <!-- table :: start -->
+        <pagination-controls   (pageChange)="page = $event"  style="float: right;" ></pagination-controls>
+      </div>     
+    </tab>
+  </tabset>
+</div>

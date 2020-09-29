@@ -1,0 +1,66 @@
+<!--
+* Copyright 2020 Vyasaka Technologies
+-->
+
+<div class="card">
+  <div class="card-header">
+     <i class="fa fa-align-justify"></i><strong>Question Management History List</strong>
+    <span class="float-right">
+      <i class="fa fa-arrow-circle-left" [routerLink]="['/question-management']" data-toggle="tooltip" title="Back" style="cursor: pointer;"></i>
+      <i
+        class="fa fa-refresh"
+        aria-hidden="true"
+        (click)="refreshPage()"
+        data-toggle="tooltip"
+        title="Refresh"
+        style="cursor: pointer;"
+      ></i>
+      <i
+        class="fa fa-cloud-upload"
+        [routerLink]="['/question-management/upload']"
+        aria-hidden="true"
+        data-toggle="tooltip"
+        title="Upload"
+        style="cursor: pointer;"
+      ></i>
+    </span>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <!-- Search :: start --> 
+      <div class="form-group col-sm-2 col-md-6">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="fa fa-search"></i>
+            </span>
+          </div>
+          <input class="form-control" [(ngModel)]="searchText" id="searchText" placeholder="search" />
+        </div>
+      </div>
+      <!-- Search :: end -->
+    </div>
+
+    <!-- table :: start -->
+    <table class="table table-responsive-sm table-bordered">
+      <thead>
+        <tr>
+          <th>File Name</th>
+          <th>Uploaded By</th>
+          <th>Uploaded On</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let element of questionManagementList | searchPipe: searchText | paginate: { itemsPerPage: 25, currentPage: page }">
+          <td>{{ element.attachment?.fileName }}</td>
+          <td>{{ element.uploadedBy }}</td>
+          <td>{{ element.uploadedOn | date: 'dd-MMM-yyyy' }}</td>
+          <td><a href="{{ element.attachment?.data }}" (click)="csvDownload(element.attachment?.data)">Download</a></td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- table :: start -->
+    <pagination-controls (pageChange)="page = $event" style="float: right;"></pagination-controls>
+  </div>
+</div>

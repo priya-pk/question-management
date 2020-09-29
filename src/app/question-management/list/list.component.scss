@@ -1,0 +1,62 @@
+/**
+ * Copyright 2020 Vyasaka Technologies
+ */
+
+.fa {
+  margin-right: 10px;
+}
+
+.table {
+	border: none;
+}
+
+.table-responsive {
+  overflow: auto;
+}
+
+.vertical-icon {
+  position: relative;
+  bottom: 15px;
+}
+
+.circle-icon {
+  background: skyblue;
+  padding: 5px;
+  border-radius: 50%;
+}
+
+.btn-group.master {
+  position: relative;
+  bottom: 2px;
+  left: 10px;
+}
+
+.card.col-sm-1.delete {
+  height: 35px;
+}
+
+.fa.fa-trash-o.delete {
+  position: relative;
+  left: 8px;
+  top: 8px;
+}
+
+@media only screen and (min-width: 768px) {
+  .filter {
+    max-width: 150px;
+    float: right;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .btn-group.master {
+    position: relative;
+    bottom: 16px;
+    left: 16px;
+  }
+}
+
+
+
+
+

@@ -1,0 +1,169 @@
+<!--
+* Copyright (c) 2020 Vyasaka Technologies. All Rights Reserved.
+-->
+
+<!-- form ::start -->
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-12 col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i><strong>Question Management Edit</strong>
+          <i class="fa fa-arrow-circle-left pull-right" [routerLink]="['/question-management']"></i>
+        </div>
+        <form [formGroup]="questionManagementForm">
+          <div class="card-body">
+             <!-- Alert :: start -->
+             <alert *ngIf="alertMsg === true" type="success" dismissOnTimeout="3000" (onClosed)="alertMsg = true">
+              Saved.
+            </alert>
+            <alert *ngIf="alertMsg === false" type="warning" dismissOnTimeout="3000" (onClosed)="alertMsg = false">
+              Error found.
+            </alert>
+            <!-- Alert :: End -->
+            <div class="form-row">
+               <!-- Id  :: start -->
+              <div class="form-group col-sm-12 col-md-4">
+                <label for="id">Id :</label>
+                <input class="form-control"  formControlName="id" readonly/>        
+              </div>
+               <!-- Id  :: End -->
+               <!-- Short Name  :: start -->
+              <div class="form-group col-sm-12 col-md-8">
+                <label>Short Name :</label>
+                <textarea
+                  placeholder="Short Name"
+                  class="form-control"
+                  formControlName="shortName"
+                  [ngClass]="{ 'is-invalid': submitted && f.shortName.errors }">
+                </textarea>
+                  <div *ngIf="submitted && f.shortName.errors" class="invalid-feedback">
+                    <div *ngIf="f.shortName.errors.required">Short Name is required</div>
+                  </div>               
+              </div>
+            </div>
+            <!-- Short Name  :: End -->
+            <!-- Group Name  :: start -->
+            <div class="form-row">
+              <div class="form-group col-sm-12 col-md-4">
+                <label>Group Name :</label>
+                <input
+                  placeholder="Group"
+                  class="form-control"
+                  formControlName="groupName"
+                  [ngClass]="{ 'is-invalid': submitted && f.groupName.errors }"
+                />
+                <div *ngIf="submitted && f.groupName.errors" class="invalid-feedback">
+                  <div *ngIf="f.groupName.errors.required">Group Name is required</div>
+                </div>
+              </div>
+              <!-- Group Name  :: End -->
+              <!-- Group Id  :: start -->
+              <div class="form-group col-sm-12 col-md-4">
+                <label>Group Id :</label>
+                <input  class="form-control" formControlName="groupId" placeholder="Group Id" [ngClass]="{ 'is-invalid': submitted && f.groupId.errors }"/>
+                <div *ngIf="submitted && f.groupId.errors" class="invalid-feedback">
+                  <div *ngIf="f.groupId.errors.required">Group Id is required</div>
+                </div>
+              </div>
+              <!-- Group Id  :: End -->
+              <!-- Suggestion Mark  :: start -->
+              <div class="form-group col-sm-12 col-md-4">
+                <label>Suggestion Mark :</label>
+                <input  class="form-control"  placeholder="Suggestion Mark" formControlName="suggestionMark" [ngClass]="{ 'is-invalid': submitted && f.suggestionMark.errors }">
+                <div *ngIf="submitted && f.suggestionMark.errors" class="invalid-feedback">
+                  <div *ngIf="f.suggestionMark.errors.required">Suggestion Mark  is required</div>
+                </div>
+              </div>
+             </div>
+             <!-- Suggestion Mark  :: End -->
+             <!-- Time Allocated  :: start -->
+            <div class="form-row">
+              <div class="form-group col-sm-12 col-md-4">
+                <label>Time Allocated :</label>
+                <input  class="form-control" formControlName="timeAllocated" placeholder="Time Allocated(mins)" [ngClass]="{ 'is-invalid': submitted && f.timeAllocated.errors }" />
+                <div *ngIf="submitted && f.timeAllocated.errors" class="invalid-feedback">
+                  <div *ngIf="f.timeAllocated.errors.required">Time Allocated  is required</div>
+                </div>
+              </div>
+              <!-- Time Allocated  :: End -->
+              <!-- Level  :: start -->
+              <div class="form-group col-sm-12 col-md-4">
+                <label>Level :</label>
+                <select  class="form-control" formControlName="level"  [ngClass]="{ 'is-invalid': submitted && f.level.errors }">
+                  <option value="">Please Select</option>
+                  <option *ngFor="let list of levelList" [value]="list">{{ list }}</option>
+                </select>
+                <div *ngIf="submitted && f.level.errors" class="invalid-feedback">
+                  <div *ngIf="f.level.errors.required">Level  is required</div>
+                </div>
+              </div>
+              <!-- Level  :: End -->
+              <!-- Type  :: Start -->                            
+              <div class="form-group col-sm-12 col-md-4">
+                <label >Type :</label>
+                <select  class="form-control" formControlName="type" (click)="checkType()" [(ngModel)]="selectedValue" [ngClass]="{ 'is-invalid': submitted && f.type.errors }" >
+                  <option value="">Please Select</option>
+                  <option *ngFor="let data of typeList" [value]="data" >{{ data }}</option>
+                </select>
+                <div *ngIf="submitted && f.type.errors" class="invalid-feedback">
+                  <div *ngIf="f.type.errors.required">Type  is required</div>
+                </div>             
+              </div>
+              <!-- Type  :: End -->                               
+            </div>
+             <!-- Description  :: Start -->                           
+            <div class="form-row">
+              <div class="form-group col-sm-12 col-md-4">
+                <label for="description">Description :</label>
+                <input  class="form-control" formControlName="description" placeholder="Description" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
+                <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                  <div *ngIf="f.description.errors.required"> Description is required</div>
+                </div>
+              </div>
+              <!-- Description  :: End -->
+              <!-- Total Options  :: Start -->
+              <div class="form-group col-sm-12 col-md-4" *ngIf="types === true">
+                <label>Total Options :</label>
+                <input  class="form-control" 
+                formControlName="totalOptions" placeholder="Total Options" />                
+              </div>
+              <!-- Total Options  :: End --> 
+              <!-- Answer   :: Start -->  
+              <div class="form-group col-sm-12 col-md-4">
+                <label>Answer :</label>
+                <input  class="form-control" formControlName="answer" placeholder="Answer" [ngClass]="{ 'is-invalid': submitted && f.answer.errors }" >
+                <div *ngIf="submitted && f.answer.errors" class="invalid-feedback">
+                  <div *ngIf="f.answer.errors.required">Answer is required</div>
+                </div>
+              </div>
+              <!-- Answer   :: End -->  
+            </div> 
+              <!-- Options   :: Start -->  
+            <div class="form-row">
+              <div  formArrayName="options" *ngFor="let option of  getControl(); let i=index">            
+              <div class="form-group col-sm-12 col-md-12"  [formGroupName]="i">
+                <label>Option :</label>
+                <input  
+                class="form-control" 
+                formControlName='option'
+                placeholder="option" >                
+              </div>
+             </div>
+           </div>           
+           <!-- Options   :: End -->  
+          </div>
+        </form>
+        <!-- Footer   :: Start -->  
+        <div class="card-footer">
+          <div class="pull-right">
+            <button class="btn btn-sm btn-danger" type="reset" (click)="onCancel"> Cancel</button>
+            <button class="btn btn-sm btn-primary" (click)="onSubmit(questionManagementForm.value)">Update</button>
+          </div>
+        </div>
+        <!-- Footer   :: End -->  
+      </div>
+    </div>
+  </div>
+</div>
+<!-- form :: end -->

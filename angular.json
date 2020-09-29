@@ -29,7 +29,7 @@
             ],
             "styles": [
               "src/styles.scss"
-            ],
+            ],  
             "scripts": []
           },
           "configurations": {
@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "management"
+    }
+  },
+  "defaultProject": "management",
+  "cli": {
+    "analytics": false
+  }
 }
