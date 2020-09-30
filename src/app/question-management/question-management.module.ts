@@ -22,6 +22,8 @@ import { UploadComponent } from './upload/upload.component';
 import { ViewComponent } from './view/view.component';
 
 import { DataService } from './data.service';
+// import { DbService } from '../services/db.service';
+
 
 @NgModule({
   declarations: [ListComponent, AddComponent, UploadComponent, HistoryComponent, EditComponent, ViewComponent ],

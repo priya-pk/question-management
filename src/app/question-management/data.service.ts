@@ -12,6 +12,7 @@ import { QuestionManagementHistoryConstant } from './question-management-history
 import { QuestionManagementHistory } from './question-management-history.model';
 import { QuestionManagement } from './question-management.model';
 
+
 @Injectable()
 export class DataService {
   constructor(private dbService: DbService) {}

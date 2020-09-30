@@ -6,14 +6,14 @@ import { JsonObject, JsonProperty } from 'json2typescript';
 
 @JsonObject('QuestionManagement')
 export class QuestionManagement {
-  // @JsonProperty('_id', String)
-  // _id: string | undefined = undefined;
+  @JsonProperty('_id', String)
+  _id: string | undefined = undefined;
 
-  // @JsonProperty('docType', String)
-  // docType: string | undefined = undefined;
+  @JsonProperty('docType', String)
+  docType: string | undefined = undefined;
 
-  // @JsonProperty('docId', String)
-  // docId: string | undefined = undefined;
+  @JsonProperty('docId', String)
+  docId: string | undefined = undefined;
 
   @JsonProperty('id', String)
   id: string | undefined = undefined;
